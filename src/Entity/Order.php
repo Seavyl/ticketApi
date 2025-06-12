@@ -118,4 +118,10 @@ class Order
 
         return $this;
     }
+
+    public function __toString(): string
+{
+    // Retourne le nom ou, à défaut, l’email
+    return $this->getId() ;
+}
 }
