@@ -1,0 +1,10 @@
+# config/routes/api.yaml
+api_login_check:
+  path:       /api/login_check
+  controller: lexik_jwt_authentication.controller.login
+  methods:    [POST]
+
+api_token_refresh:
+  path:       /api/token/refresh
+  controller: lexik_jwt_authentication.controller.refresh_token
+  methods:    [POST, GET]
