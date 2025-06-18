@@ -1,14 +1,10 @@
 nelmio_cors:
   defaults:
-    origin_regex: false
-    allow_origin:      ['http://localhost:5174']
-    allow_credentials: false   # JWT ne passe pas par cookie
-    allow_headers:     ['Content-Type','Authorization']
-    allow_methods:     ['GET','POST','PUT','DELETE','OPTIONS']
-    max_age:           3600
+    allow_origin:        ['*']      # ou ['http://localhost:3000'] en prod
+    allow_methods:       ['GET','POST','PUT','PATCH','DELETE','OPTIONS']
+    allow_headers:       ['Content-Type','Authorization']
+    expose_headers:      ['Link']
+    max_age:             3600
+    allow_credentials:   false     # ou true si vous utilisez cookies
   paths:
-    '^/api/':
-      allow_origin:      ['http://localhost:5174']
-      allow_credentials: false
-      allow_headers:     ['Content-Type','Authorization']
-      allow_methods:     ['GET','POST','PUT','DELETE','OPTIONS']
+    '^/api/': ~                   # applique à toutes les routes /api/*

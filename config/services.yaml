@@ -12,4 +12,10 @@ services:
   App\Controller\SecurityController:
     public: true
 
+  App\Command\:
+        resource: '../src/Command'
+        tags: ['console.command']
+  App\Repository\:
+    resource: '../src/Repository'
+    tags: ['doctrine.repository_service']
   # LexikJWT fournit déjà ses handlers, pas besoin de les redéclarer si tu n'en as pas de custom

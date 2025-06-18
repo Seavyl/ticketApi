@@ -12,15 +12,14 @@ security:
         property: email
 
   firewalls:
-    # Dev / assets
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
 
-    # point d’entrée pour récupérer le JWT
     api_login:
       pattern:   ^/api/login_check$
       stateless: true
+      provider:  app_user_provider
       json_login:
         check_path:       /api/login_check
         username_path:    email
@@ -28,7 +27,12 @@ security:
         success_handler:  lexik_jwt_authentication.handler.authentication_success
         failure_handler:  lexik_jwt_authentication.handler.authentication_failure
 
-    # toutes les autres routes /api passent par le JWT
+    api_public:
+      # ce firewall "attrape" uniquement GET /api/tickets
+      pattern:   ^/api/tickets$
+      stateless: true
+      security:  false
+
     api:
       pattern:   ^/api
       stateless:  true
@@ -36,5 +40,11 @@ security:
       jwt:        ~
 
   access_control:
+    # login_check doit rester anonyme
     - { path: ^/api/login_check$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/api,            roles: IS_AUTHENTICATED_FULLY }
+    # (optionnel) vous pouvez laisser cette ligne, mais le firewall public la gère déjà
+    - { path: ^/api/tickets$,      roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET] }
+
+    - { path: ^/api/contacts$,      roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET] }
+    # tout le reste nécessite un JWT
+    - { path: ^/api,               roles: IS_AUTHENTICATED_FULLY }
