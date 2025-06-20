@@ -16,6 +16,10 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
 
+    contacts_public:
+      pattern:   ^/api/contacts$
+      security:  false
+
     api_login:
       pattern:   ^/api/login_check$
       stateless: true

@@ -1,0 +1,7 @@
+# config/packages/easy_admin.yaml
+easy_admin:
+  site_name: 'TicketAPI Admin'
+  design:
+    menu:
+      - { label: 'Dashboard', route: 'admin' }
+  # … vos autres options
