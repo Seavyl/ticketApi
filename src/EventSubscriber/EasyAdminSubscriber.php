@@ -37,8 +37,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if ($entity instanceof User) {
             if ($entity->getPassword() !== null) {
                 $this->hashPassword($entity, $entity->getPassword());
-            }
-        } else {
+            } else {
             $dbUser = $this->em->createQueryBuilder()
                     ->select('u')
                     ->from(User::class, 'u')
@@ -49,7 +48,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
                 if ($dbUser[0]['u_password'] !== null) {
                     $entity->setPassword(trim($dbUser[0]['u_password']));
                 }
-        }
+         }
+        } 
     }
 
     public function hashPasswordUpdate(BeforeEntityUpdatedEvent $event)

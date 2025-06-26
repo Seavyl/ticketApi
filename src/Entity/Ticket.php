@@ -82,7 +82,7 @@ class Ticket
         return $this;
     }
 
-    public function getstartDate(): ?\DateTime
+    public function getStartDate(): ?\DateTime
     {
         return $this->startDate;
     }
